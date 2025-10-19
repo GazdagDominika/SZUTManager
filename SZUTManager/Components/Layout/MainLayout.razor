@@ -1,17 +1,18 @@
 ﻿@inherits LayoutComponentBase
+@* Required *@
+<MudThemeProvider />
+<MudPopoverProvider />
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@* Needed for dialogs *@
+<MudDialogProvider />
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+@* Needed for snackbars *@
+<MudSnackbarProvider />
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<MudLayout>
+	<NavMenu />
+	<MudMainContent Class="mt-0 pt-0">
+		@Body
+	</MudMainContent>
+
+</MudLayout>
