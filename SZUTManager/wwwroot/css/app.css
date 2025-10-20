@@ -11,7 +11,11 @@
     align-items: center;
 }
 
-
+.bottom-left-btn {
+    justify-content: end;
+    align-items: start;
+    align-content: center;
+}
 
 .login-container {
     display: flex;
