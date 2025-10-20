@@ -1,0 +1,54 @@
+﻿@page "/"
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager Navigation
+
+
+
+<MudPaper Elevation="0" Class="page-background">
+
+    <MudStack Class="login-container" Spacing="3" AlignItems=AlignItems.Center>
+        <MudText Typo="Typo.h4" Align=Align.Center>Welcome!</MudText>
+
+        <MudStack Class="stack-card" Spacing="2" Width="width: 60%;">
+            <MudTextField @bind-Value="model_.Email" Label="Email" Variant="Variant.Outlined" For="@(() => model_.Email)" />
+            <MudTextField @bind-Value="model_.Password" Label="Password" Variant="Variant.Outlined" InputType="InputType.Password" For="@(() => model_.Password)" />
+            <MudButton @onclick="GoToHome" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true">Login</MudButton>
+        </MudStack>
+
+        <MudStack Row="true" AlignItems=AlignItems.Center Justify=Justify.Center Spacing="1">
+            <MudText>Don't have an account?</MudText>
+            <MudButton @onclick="GoToRegister" Variant="Variant.Outlined" Color="Color.Primary">Register</MudButton>
+        </MudStack>
+    </MudStack>
+
+</MudPaper>
+
+@code {
+    LoginForm model_ = new LoginForm();
+    bool success;
+
+    public class LoginForm
+    {
+        
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "Password must be at least 8 characters long.", MinimumLength = 8)]
+        public string Password { get; set; }
+
+        
+
+    }
+
+    void GoToRegister()
+    {
+        Navigation.NavigateTo("/register");
+    }
+
+    void GoToHome()
+    {
+        Navigation.NavigateTo("/home");
+    }
+    }

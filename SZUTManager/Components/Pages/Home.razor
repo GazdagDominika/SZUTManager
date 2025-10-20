@@ -1,7 +1,89 @@
-﻿@page "/"
+﻿@page "/home"
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager Navigation
+
+<MudLayout>
+
+    <MudAppBar Color="Color.Primary" Fixed="false">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu"
+                       Color="Color.Inherit"
+                       Edge="Edge.End"
+                       OnClick="ToggleDrawer" />
+        <MudSpacer />
+        <MudText Align="Align.Center">Welcome to Workspace Manager!</MudText>
+        <MudSpacer />
+        <MudButton @onclick="GoToLogin"
+                   Variant="Variant.Filled"
+                   Color="Color.Secondary">
+            Log out
+        </MudButton>
+    </MudAppBar>
+
+    
+
+    <MudDrawer Variant="DrawerVariant.Temporary" @bind-Open="_drawerOpen"
+               ClipMode="DrawerClipMode.Never"
+               Elevation="4"
+               Width="250px">
+        <MudNavMenu>
+            <MudText Typo="Typo.h6" Class="px-6 pt-4 pb-2">
+                Workspace Manager
+            </MudText>
+            <MudDivider Class="my-2" />
+            <MudNavLink Href="/home" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+            <MudNavLink Href="/order" Icon="@Icons.Material.Filled.AddCircle">Add order</MudNavLink>
+            <MudNavLink Href="/history" Icon="@Icons.Material.Filled.History">Order history</MudNavLink>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" Color="Color.Primary" OnClick="ToggleDrawer">Back</MudButton>
+            </MudCardActions>
+        </MudNavMenu>
+    </MudDrawer>
 
 
-<MudPaper>
-	<MudButton Variant="Variant.Filled" Color="Color.Primary">Primary</MudButton>
-	<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
-</MudPaper>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False" Class="px-6 py-4">
+            <MudGrid>
+                <MudItem xs="12" sm="2">
+                    <MudPaper Class="p-4">
+                        <MudText Align="Align.Center">
+                            WorkSpaces
+                        </MudText>
+                    </MudPaper>
+                </MudItem>
+                <MudItem xs="12" sm="10">
+                    <MudPaper Class="p-4 d-flex  flex-wrap">
+                        <MudText>Actual Order</MudText>
+                        <MudSpacer></MudSpacer>
+                        <MudText>Planned Order 1</MudText>
+                        <MudSpacer></MudSpacer>
+                        <MudText>Planned Order 2</MudText>
+                        <MudSpacer></MudSpacer>
+                        <MudText>Planned Order 3</MudText>
+                        <MudSpacer></MudSpacer>
+                        <MudText>Planned Order 4</MudText>
+                        <MudSpacer></MudSpacer>
+                        <MudText>Planned Order 5</MudText>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+    </MudMainContent>
+
+    
+
+</MudLayout>
+
+@code {
+    private bool _drawerOpen = true;
+
+    void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    void GoToLogin()
+    {
+        Navigation.NavigateTo("/");
+    }
+}
